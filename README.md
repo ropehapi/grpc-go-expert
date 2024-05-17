@@ -20,8 +20,12 @@ Para instalar esses plugins, basta rodar os comandos:
 
 >  go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
 
+Para cada chamada criada no arquivo protobuf, você deve rodar os plugins e 
+implementar na camada de serviço de sua aplicação métodos que implementem as
+interfaces gRPC geradas pelos plugins.
+
 Para rodar os plugins e gerar nosso código boilerplate, basta rodar o comando:
-> protoc --go_out=. --go_grpc_out=. proto/entities.proto
+> protoc --go_out=. --go-grpc_out=. proto/<sua_entidade>.proto
 
 ## Banco de dados
 Para esse projeto, escolhemos trabalhar com um banco em memória como o SQLite3.
@@ -35,4 +39,12 @@ nome_banco.db` e rodar suas queries.
 
 ## Consumindo a aplicação
 Para consumir a aplicação, será necessário instalar o [Evans](https://github.com/ktr0731/evans),
-um client gRPC de terminal, e escrever o consumo das services desejadas.
+um client gRPC de terminal, e escrever o consumo das services desejadas. Para acessar
+o evans, basta rodar o comando:
+> evans -r repl
+
+> package pb
+ 
+> service <nome_da_service>
+ 
+> call <nome_da_chamada>
